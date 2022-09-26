@@ -21,21 +21,21 @@ def buscarFuncionario(cpfFuncionario):
 
 def excluirFuncionario(cpfFuncionario):
    for busca in funcionarios:
-        if busca['cpf'] == cpfFuncionario:
-            print('Funcionario encontrado')
-            funcionarios.remove(busca)
-            print('Funcionario removido')
-        elif busca['cpf'] != cpfFuncionario:
-            print('CPF não encontrado digite novamente')
-            cpfFuncionario = input('CPF: ')
-            return excluirFuncionario(cpfFuncionario)
+      if busca['cpf'] == cpfFuncionario:
+         print('Funcionario encontrado')
+         funcionarios.remove(busca)
+         print('Funcionario removido')
+      elif busca['cpf'] != cpfFuncionario:
+         print('CPF não encontrado digite novamente')
+         cpfFuncionario = input('CPF: ')
+         return excluirFuncionario(cpfFuncionario)
 
 def novoTelefone(cpfFuncionario):
    for busca in funcionarios:
       if busca['cpf'] == cpfFuncionario:
          novoNumero = input('Digite o novo numero: ')
-          #telefones.apend(novoNumero)
-         busca['telefone'] = telefones.apend(novoNumero)
+         telefones.append(novoNumero)
+         busca['telefone'] = telefones
       elif busca['cpf'] != cpfFuncionario:
          print('CPF não encontrado digite novamente')
          cpfFuncionario = input('CPF: ')
@@ -114,6 +114,7 @@ while(opcoesMenu != 0):
       if opcoesMenu == 3:
          cpf = input('Digite o CPF do funcionario: ')
          novoTelefone(cpf)
+         print(funcionarios)
 
       elif opcoesMenu == 4:
          cpf = input('Digite o CPF do funcionario: ')
