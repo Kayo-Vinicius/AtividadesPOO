@@ -11,13 +11,13 @@ def cadastrarFuncionario(nomeFuncionario, cpfFuncionario, cargoFuncionario, sala
 
 def buscarFuncionario(cpfFuncionario):
    for busca in funcionarios:
-        if busca['cpf'] == cpfFuncionario:
-            print('Funcionario encontrado')
-            return busca
-        elif busca['cpf'] != cpfFuncionario:
-            print('Funcionario não encontrado digite novamente')
-            cpfFuncionario = input('CPF: ')
-            return buscarFuncionario(cpfFuncionario)
+      if busca['cpf'] == cpfFuncionario:
+         print('Funcionario encontrado')
+         return busca
+      else:
+         print('Funcionario não encontrado digite novamente')
+         cpfFuncionario = input('CPF: ')
+         return buscarFuncionario(cpfFuncionario)
 
 def excluirFuncionario(cpfFuncionario):
    for busca in funcionarios:
@@ -91,10 +91,8 @@ def editarFuncionario(cpfFuncionario):
             
 
 while(opcoesMenu != 0):
-   print('\n1 - Cadastrar Funcionario\n2 - Buscar Funcionario\n0 - Sair')
-   opcoesMenu = int(input('Digite o numero da opcão que deseja fazer: '))
-   
-   if opcoesMenu == 1:
+   if not funcionarios:
+      print('Não tem nenhum funcionario cadastrado\nCadastre um primeiro')
       nome = input('Nome: ')
       cpf = input('CPF: ')
       cargo = input('Cargo: ')
@@ -102,27 +100,40 @@ while(opcoesMenu != 0):
       numeroTel = input('Telefone: ')
       
       telefones.append(numeroTel)
-      
       funcionarios.append(cadastrarFuncionario(nome, cpf, cargo, salario, telefones))
-    
-   elif opcoesMenu == 2:
-      cpf = input('Digite o CPF do funcionario: ')
-      buscarFuncionario(cpf)
-      print('\n3 - Novo telefone\n4 - Editar dados do funcionario\n5 - Excluir Funcionario')
+      print(funcionarios)
+
+   else:
+      print('\n1 - Cadastrar Funcionario\n2 - Buscar Funcionario\n0 - Sair')
       opcoesMenu = int(input('Digite o numero da opcão que deseja fazer: '))
 
-      if opcoesMenu == 3:
-         cpf = input('Digite o CPF do funcionario: ')
-         novoTelefone(cpf)
-         print(funcionarios)
-
-      elif opcoesMenu == 4:
-         cpf = input('Digite o CPF do funcionario: ')
-         editarFuncionario(cpf)
-         print(funcionarios)
-
-      elif opcoesMenu == 5:
-         cpf = input('Digite o CPF do funcionario: ')
-         excluirFuncionario(cpf)
+      if opcoesMenu == 1:
+         nome = input('Nome: ')
+         cpf = input('CPF: ')
+         cargo = input('Cargo: ')
+         salario = float(input('Salario: '))
+         numeroTel = input('Telefone: ')
       
-     
+         telefones.append(numeroTel)
+         funcionarios.append(cadastrarFuncionario(nome, cpf, cargo, salario, telefones))
+         print(funcionarios)
+      
+      elif opcoesMenu == 2:
+         cpf = input('Digite o CPF do funcionario: ')
+         buscarFuncionario(cpf)
+         print('\n3 - Novo telefone\n4 - Editar dados do funcionario\n5 - Excluir Funcionario\n0 - Sair')
+         opcoesMenu = int(input('Digite o numero da opcão que deseja fazer: '))
+
+         if opcoesMenu == 3:
+            cpf = input('Digite o CPF do funcionario: ')
+            novoTelefone(cpf)
+            print(funcionarios)
+
+         elif opcoesMenu == 4:
+            cpf = input('Digite o CPF do funcionario: ')
+            editarFuncionario(cpf)
+            print(funcionarios)
+
+         elif opcoesMenu == 5:
+            cpf = input('Digite o CPF do funcionario: ')
+            excluirFuncionario(cpf)   
