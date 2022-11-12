@@ -2,46 +2,51 @@ class Cliente():
     def __init__(self, nome_pessoa, cpf_pessoa) -> None:
         self.nome = nome_pessoa
         self.cpf = cpf_pessoa
+    
+class Conta_Bancaria(Cliente):
+    def __init__(self, nome, cpf, numero_conta, saldo_conta) -> None:
+        self.numConta = numero_conta
+        self.saldo = saldo_conta
         self.contas_bancarias = []
+        self.nome = nome
+        self.cpf = cpf
 
-    def criarConta(self, numero_conta, saldo_conta, tipo_conta):
-        self.contas_bancarias.append(Conta(numero_conta, saldo_conta, tipo_conta))
+    def criarConta(self, nome, cpf, numero_conta, saldo_conta):
+        self.contas_bancarias.append(Conta_Bancaria(nome, cpf, numero_conta, saldo_conta))
 
     def imprimirContas(self):
         for busca in self.contas_bancarias: 
-            print(busca.numConta, busca.saldo, busca.tipoConta)
+            print(busca.nome, busca.cpf , busca.numConta, busca.saldo)
 
-    def transferencia(self, numero_conta, valor_transferencia, tipo_conta):
+
+class Conta_Corrente(Conta_Bancaria):
+    def transferencia(self, numero_conta, valor_transferencia):
         taxa_transferencia = 2
-        for busca in self.contas_bancarias: 
-            if busca.numConta == numero_conta and busca.tipoConta == tipo_conta:
-                if tipo_conta == 'conta_corrente':
+        for busca in self.contas_bancarias:
+            if busca.numConta == numero_conta:
                     print(f'Saldo Antes:{busca.numConta} {busca.saldo}')
                     taxa_transferencia *= 5
                     busca.saldo = busca.saldo - (valor_transferencia + taxa_transferencia)
                     print(f'Saldo Depois:{busca.numConta} {busca.saldo}')
-                elif tipo_conta == 'conta_poupanca':
+
+class Conta_Poupanca(Conta_Bancaria):
+    def transferencia(self, numero_conta, valor_transferencia):
+        taxa_transferencia = 2
+        for busca in self.contas_bancarias:
+            if busca.numConta == numero_conta:
                     taxa_transferencia *= 0.25
                     print(f'Saldo Antes:{busca.numConta} {busca.saldo}')
                     busca.saldo = busca.saldo - (valor_transferencia + taxa_transferencia)
                     print(f'Saldo Depois:{busca.numConta} {busca.saldo}')
-
-class Conta():
-    def __init__(self, numero_conta, saldo_conta, tipo_conta) -> None:
-        self.numConta = numero_conta
-        self.saldo = saldo_conta  
-        self.tipoConta = tipo_conta
     
 
-c1 = Cliente('kayo', '1111')
-c1.criarConta(123, 1000, 'conta_corrente')
-print(c1.nome, c1.cpf)
+c1 = Conta_Corrente('kayo', '1111', 123, 1000)
+c1.criarConta('kayo', '1111', 123, 1000)
 c1.imprimirContas()
+c1.transferencia(123, 100)
 
-c2 = Cliente('bia', '2222')
-c2.criarConta(456, 2000, 'conta_poupanca')
-print(c2.nome, c2.cpf)
+
+c2 = Conta_Poupanca('bia', '2222', 456, 2000)
+c2.criarConta('bia', '2222', 456, 2000)
 c2.imprimirContas()
-
-c1.transferencia(123, 500, 'conta_corrente')
-c2.transferencia(456, 200, 'conta_poupanca')
+c2.transferencia(456, 200)
