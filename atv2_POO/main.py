@@ -2,12 +2,14 @@ from pessoaFisica import Professor
 from pessoaFisica import Aluno
 from pessoaFisica import Tecnico
 from curso import Curso
+from pessoaJuridica import EmpresaJr
+from pessoaJuridica import Fornecedor
 
 opcoesMenu = None
 
-while(opcoesMenu != 0):
+while (opcoesMenu != 0):
     print('--------------------------')
-    print('1 - Manter Aluno\n2 - Manter Curso\n3 - Manter Disciplina\n4 - Matricular Aluno\n5 - Listar Alunos\n0 - Sair')
+    print('1 - Adicionar Curso\n2 - Adicionar Professor\n3 - Adicionar Tecnico\n4 - Adicionar Aluno \n5 - Adicionar Fornecedor\n6 - Adicionar EmpresaJr\n7 - pesquisar Aluno\n0 - Sair')
     print('--------------------------')
     opcoesMenu = int(input('Digite o numero da opcão que deseja fazer: '))
     
@@ -17,26 +19,60 @@ while(opcoesMenu != 0):
         disciplinas = input('Disciplinas: ')
         cargaHoraria = input('Carga Horaria: ')
 
-        Curso.addCurso(nomeCurso, descricao, disciplinas, cargaHoraria)  
+        curso = Curso(nomeCurso, descricao, disciplinas, cargaHoraria)
+        curso.addCurso(nomeCurso, descricao, disciplinas, cargaHoraria)
+        curso.imprimirCurso()
 
-    elif opcoesMenu == 2:
+    if opcoesMenu == 2:
         nomeProfessor = input('Nome do Professor: ')
         formacao = input('Formação do Professor: ')
         salario = int(input('Salario: '))
 
-        Professor.addProfessor(nomeProfessor, formacao, salario)
-        Professor.imprimir()
+        professor = Professor(nomeProfessor, formacao, salario)
+        professor.addProfessor(nomeProfessor, formacao, salario)
+        professor.imprimirProfessor()
 
-    elif opcoesMenu == 3:
-        print('ijwwe')
+    if opcoesMenu == 3:
+        nomeTecnico = input('Nome do Tecnico: ')
+        areaAtuacao = input('Area de atuação: ')
 
-    elif opcoesMenu == 4:
-        nomeAluno = input('Nome Aluno: ')
+        tecnico = Tecnico(nomeTecnico, areaAtuacao)
+        tecnico.addTecnico(nomeTecnico, areaAtuacao)
+        tecnico.imprimirTecnico()
+
+    if opcoesMenu == 4:
+        nomeAluno = input('Nome do Aluno: ')
         curso = input('Curso: ')
         matricula = input('Matricula: ')
         anoEntrada = int(input('Ano de entrada: '))
 
-        Aluno.addAluno(nomeAluno, curso, matricula, anoEntrada)
+        aluno = Aluno(nomeAluno, curso, matricula, anoEntrada)
+        aluno.addAluno(nomeAluno, curso, matricula, anoEntrada)
+        aluno.imprimirAluno()
 
-    elif opcoesMenu == 5:
-        Aluno.imprimirAluno()
+        print(aluno.alunos)
+
+    if opcoesMenu == 5:
+        nomeFornecedor = input('Nome do Fornecedor: ')
+
+        fornecedor = Fornecedor(nomeFornecedor)
+        fornecedor.addFornecedor(nomeFornecedor)
+        fornecedor.imprimirFornecedor()
+
+    if opcoesMenu == 6:
+        nomeEmpresajr = input('Nome da Empresa: ')
+
+        empresa = EmpresaJr(nomeEmpresajr)
+        empresa.addEmpresajr(nomeEmpresajr)
+        empresa.imprimirEmpresajr()
+
+    if opcoesMenu == 7:
+        nomeAluno = input('Nome do Aluno: ')
+        curso = input('Curso: ')
+        matricula = int(input('Matricula: '))
+        anoEntrada = int(input('Ano de entrada: '))
+
+        buscarAluno = Aluno(nomeAluno, curso, matricula, anoEntrada)
+        buscarAluno.pesquisarAluno(nomeAluno)
+
+        

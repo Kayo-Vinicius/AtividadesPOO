@@ -1,47 +1,61 @@
 opcoesMenu = None
-professores = []
-alunos = []
-tecnicos = []
 
-class Professor:
-    def __init__(self, nome, formacao, salario) -> None:
+class Professor():
+    def __init__(self, nome: str, formacao: str, salario: float) -> None:
         self.nome = nome
         self.formacao = formacao
         self.salario = salario
+        self.professores = []
 
     def addProfessor(self, nome, formacao, salario):
-        professores.append(Professor(nome, formacao, salario))
+        self.professores.append(Professor(nome, formacao, salario))
     
     def imprimirProfessor(self):
-        print('\n-------------------Dados do Professor---------------')
-        print(f'Nome: {self.nome} \nFormacao: {self.formacao} \nSalario: {self.salario}')
+        for busca in self.professores:
+            print('\n-------------------Dados do Professor---------------')
+            print(f'Nome: { busca.nome} \nFormacao: {busca.formacao} \nSalario: {busca.salario}')
 
 class Aluno():
-    def __init__(self, nome, curso, matricula, anoEntrada) -> None:
-        self.nome = nome
+    def __init__(self, nomeAluno: str, curso: str, matricula: int, anoEntrada: int) -> None:
+        self.nomeAluno = nomeAluno
         self.curso = curso
         self.matricula = matricula
         self.anoEntrada = anoEntrada
+        self.alunos = []
+        self.alunosMatriculados = []
 
-    def addAluno(self, nome, curso, matricula, anoEntrada):
-        alunos.append(Aluno(nome, curso, matricula, anoEntrada))
+    def addAluno(self, nomeAluno, curso, matricula, anoEntrada):
+        self.alunos.append(Aluno(nomeAluno, curso, matricula, anoEntrada))
+        self.alunosMatriculados = {'nomeAluno': nomeAluno}
 
     def imprimirAluno(self):
-        print('\n-------------------Dados do Aluno-------------------')
-        print(f'Nome: {self.nome} \nCurso: {self.curso} \nMatricula: {self.matricula} \nAno de Entrada: {self.anoEntrada}')
+        for busca in self.alunos:
+            print('\n-------------------Dados do Aluno-------------------')
+            print(f'Nome: {busca.nomeAluno} \nCurso: {busca.curso} \nMatricula: {busca.matricula} \nAno de Entrada: {busca.anoEntrada}')
 
+    def pesquisarAluno(self, nome):
+        print('nao deu certo')
+        for busca in self.alunosMatriculados:
+            print('deu certo')
+            if busca['nomeAluno'] == nome:
+                print('Aluno já existe')
+            else:
+                print('Não e')
+    
 class Tecnico():
     def __init__(self, nome, areaAtuacao) -> None:
         self.nome = nome
         self.areaAtuacao = areaAtuacao
+        self.tecnicos = []
 
     def addTecnico(self, nome, areaAtuacao):
-        tecnicos.append(Tecnico( nome, areaAtuacao))
+        self.tecnicos.append(Tecnico( nome, areaAtuacao))
 
     def imprimirTecnico(self):
-        print('\n-------------------Dados do Tecnico-----------------')
-        print(f'Nome: {self.nome} \nArea de Atuacao: {self.areaAtuacao}')
-
+        for busca in self.tecnicos:
+            print('\n-------------------Dados do Tecnico-----------------')
+            print(f'Nome: {busca.nome} \nArea de Atuacao: {busca.areaAtuacao}')
+'''
 p1 = Professor('Francois', 'Programacao', '1000')
 p1.imprimirProfessor()
 
@@ -54,7 +68,7 @@ a1.imprimirAluno()
 
 
 
-'''
+
 while(opcoesMenu != 0):
     print('--------------------------')
     print('1 - Adicionar Professor\n2 - Adicionar Aluno\n3 - Adicionar Tecnico\n4 - Mostrar Dados\n0 - Sair')

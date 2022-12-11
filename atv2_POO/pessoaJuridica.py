@@ -1,21 +1,23 @@
-pessoas_juridicas = []
-
 class Fornecedor():
-    def __init__(self, nome_fornecedor) -> None:                                                                         
-        self.nome_fornecedor = nome_fornecedor
+    def __init__(self, nomeFornecedor) -> None:                                                                         
+        self.nomeFornecedor = nomeFornecedor
+        self.fornecedores = []
 
-    def addFornecedor(self, nome_fornecedor):
-        pessoas_juridicas.append(Fornecedor(nome_fornecedor))
+    def addFornecedor(self, nomeFornecedor):
+        self.fornecedores.append(Fornecedor(nomeFornecedor))
     
     def imprimirFornecedor(self):
-        print(f'Dados: {self.nome_fornecedor}')
+        for busca in self.fornecedores:
+            print(f'Dados: {busca.nomeFornecedor}')
 
 class EmpresaJr():
-    def __init__(self, nome_empresajr) -> None:
-        self.nome_empresajr = nome_empresajr
+    def __init__(self, nomeEmpresajr) -> None:
+        self.nomeEmpresajr = nomeEmpresajr
+        self.empresas = []
 
-    def addProfessor(self, nome_empresajr):
-        pessoas_juridicas.append(EmpresaJr(nome_empresajr))
+    def addEmpresajr(self, nomeEmpresajr):
+        self.empresas.append(EmpresaJr(nomeEmpresajr))
     
-    def imprimirEmpresa(self):
-        print(f'Dados: {self.nome_empresajr}')
+    def imprimirEmpresajr(self):
+        for busca in self.empresas:
+            print(f'Dados: {busca.nomeEmpresajr}')
