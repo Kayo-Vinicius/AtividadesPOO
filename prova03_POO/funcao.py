@@ -1,6 +1,5 @@
 from bancoDados import connection
 
-
 class Funcao:
     def __init__(self, codigo, nome):
         self.codigo = codigo
@@ -31,23 +30,7 @@ class Funcao:
             print('Função não encontrada')
             codigo_busca = input('Digite o novamente CODIGO: ')
             Funcao.pesquisarFuncao_Cod(codigo_busca)
-
-    def pesquisarFuncao_Nome(nome_busca):
-        with connection.cursor() as c:
-            sql = f"SELECT * FROM funcao"
-            c.execute(sql)
-            res_all = c.fetchall()
-            print('Pesquisando...')
-
-            for busca in res_all:
-                if busca['nome'] == nome_busca:
-                    print(f'ID encontrado')
-                    print(busca['id'])
-                    return busca['id']
-
-            print('Função não encontrado')
-            nome_busca = input('Digite novamente o NOME: ')
-            Funcao.pesquisarFuncao_Nome(nome_busca)
+            return busca['id']
 
     def editarFuncao(codigo_busca):
         with connection.cursor() as c:
@@ -61,10 +44,13 @@ class Funcao:
 
     def deletarFuncao(codigo_busca):
         with connection.cursor() as c:
-            codigo_pesquisa = Funcao.pesquisarFuncao_Cod(codigo_busca)
+            try:
+                codigo_pesquisa = Funcao.pesquisarFuncao_Cod(codigo_busca)
 
-            sql = f"DELETE FROM funcao WHERE id = '{codigo_pesquisa}'"
+                sql = f"DELETE FROM funcao WHERE id = '{codigo_pesquisa}'"
 
-            c.execute(sql)
-            connection.commit()
-            print('Deletado com sucesso')
+                c.execute(sql)
+                connection.commit()
+                print('Deletado com sucesso')
+            except:
+                print('Não foi possivel deltar pois tem um funcionario cadastrado')

@@ -30,11 +30,13 @@ class Funcionario:
                 if busca['cpf'] == cpf_busca:
                     print(f'Funcionario encontrado')
                     print(busca['nome'])
+                    print(busca['cpf'])
                     return busca['cpf']
 
-            print('CPF não encontrado')
-            cpf_busca = input('Digite novamente o CPF: ')
-            Funcionario.pesquisarFuncionario(cpf_busca)
+                print('CPF não encontrado')
+                novo_cpf = input('Digite novamente o CPF: ')
+                Funcionario.pesquisarFuncionario(novo_cpf)
+                return busca['cpf']
 
     def editarFuncionario(cpf_busca):
         with connection.cursor() as c:
@@ -47,7 +49,8 @@ class Funcionario:
                     '\n1 - Novo nome\n2 - Nova Função\n3 - Novo Salario\n4 - Novo Telefone\n0 - Voltar ao Menu do Funcionario')
                 print('--------------------------')
 
-                opcesEditar = int(input('Digite o numero da opcão que deseja fazer: '))
+                opcesEditar = int(
+                    input('Digite o numero da opcão que deseja fazer: '))
 
                 if (opcesEditar == 1):
                     novo_nome = input('Novo Nome: ')
